@@ -12,8 +12,8 @@ RUN \
     python-distribute \
     python-pip && \
   mkdir -p /usr/src/app && \
-  pip install distribute && \
-  pip install pip
+  pip install -U distribute && \
+  pip install -U pip
 
 # Lazy install of required packages and python libraries
 WORKDIR /usr/src/app
@@ -29,6 +29,6 @@ ONBUILD RUN \
   fi && \
   if [ -e requirements.txt ] ; then \
     while read r; do \
-      pip install $r \
+      pip install -U $r \
     done < requirements.txt \
   fi
