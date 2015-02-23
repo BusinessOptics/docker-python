@@ -17,7 +17,7 @@ RUN \
 
 # Lazy install of required packages and python libraries
 WORKDIR /usr/src/app
-COPY install_requirements.sh
+COPY install_requirements.sh .
 # Copy git files to application directory
 ONBUILD COPY . /usr/src/app
 # Lazily install packages and python libraries
