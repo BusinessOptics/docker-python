@@ -17,18 +17,8 @@ RUN \
 
 # Lazy install of required packages and python libraries
 WORKDIR /usr/src/app
+COPY install_requirements.sh
 # Copy git files to application directory
 ONBUILD COPY . /usr/src/app
 # Lazily install packages and python libraries
-ONBUILD RUN \
-  if [ -e packages.txt ] ; then \
-    DEBIAN_FRONTEND=noninteractive \
-    while read p; do \
-      apt-get -y --no-install-recommends install $p \
-    done < packages.txt \
-  fi && \
-  if [ -e requirements.txt ] ; then \
-    while read r; do \
-      pip install -U $r \
-    done < requirements.txt \
-  fi
+ONBUILD RUN /usr/src/app/install_requirements.sh
